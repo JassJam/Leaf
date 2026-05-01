@@ -21,7 +21,8 @@ project_utils:declare_project({
         {path = "src/**.hpp"},
     },
     files = {
-        {path = "src/**.cpp"}
+        {path = "src/**.cpp"},
+        {path = "$(projectdir)/.env"},
     },
     
     filegroups = {

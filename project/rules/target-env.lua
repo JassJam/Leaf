@@ -46,7 +46,7 @@ rule("target-env")
         
         for _, sourcefile in ipairs(sourcefiles) do
             local file_name = path.filename(sourcefile)
-            if file_name:match("^%.env") and not file_name:match("%.local$") then
+            if file_name:match("^%.env") and not file_name:match("%.env.local$") then
                 local local_file = sourcefile .. ".local"
                 local local_exists = os.isfile(local_file)
                 table.insert(env_files, {

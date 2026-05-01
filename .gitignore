@@ -382,3 +382,6 @@ FodyWeavers.xsd
 # Remove generated files
 *.generated.*
 /vsxmake*
+
+# env files
+.env
