@@ -28,7 +28,20 @@ add_requires("crow")
 
 --
 
+add_requires("fmt")
+
+--
+
 add_requires("coffee.dipp")
+
+--
+
+add_requires("libpq", {configs = {shared = true}})
+add_requires("libpqxx", {configs = {shared = true}})
+
+--
+
+add_requires("nlohmann_json")
 
 --
 

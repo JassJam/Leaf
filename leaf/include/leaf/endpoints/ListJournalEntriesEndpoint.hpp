@@ -1,6 +1,7 @@
 #pragma once
 
 #include <crow.h>
+#include <leaf/interfaces/JournalRepository.hpp>
 
 namespace leaf
 {
@@ -8,11 +9,17 @@ namespace leaf
     {
     public:
         static constexpr crow::HTTPMethod Method  = crow::HTTPMethod::Get;
-        static constexpr const char       Route[] = "/journal-entries";
+        static constexpr const char       Route[] = "/memos";
 
-        std::string HandleRequest(const crow::request&)
+    public:
+        explicit ListJournalEntriesEndpoint(IJournalRepository& journalRepository)
+            : m_JournalRepository(journalRepository)
         {
-            return "Hello world2";
         }
+
+        crow::response HandleRequest(const crow::request& req);
+
+    private:
+        IJournalRepository& m_JournalRepository;
     };
 }

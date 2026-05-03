@@ -12,10 +12,8 @@ Leaf is a simple backend application in C++, designed specifically for [my memo 
 ``` JSON
 // Request Body:
 {
-    "page": 0,
-    "pageSize": 10,
-    "sortBy": "createdAt",
-    "sortOrder": "desc"
+    "page_index": 0,
+    "page_size": 10
 }
 
 // Response Body:
@@ -24,17 +22,18 @@ Leaf is a simple backend application in C++, designed specifically for [my memo 
         {
             "id": "1",
             "title": "Memo Title",
-            "content": "Memo content goes here...",
-            "createdAt": "2024-01-01T12:00:00Z"
+            "summary": "A brief summary of the memo content...",
+            "create_date": "2024-01-01T12:00:00Z",
+            "markdown_file_id": "abc123",
         },
         ...
     ],
-    "page": 0,
-    "pageSize": 10,
-    "totalPages": 10,
-    "totalMemos": 100,
-    "hasNextPage": true,
-    "hasPreviousPage": false
+    "current_page": 0,
+    "page_size": 10,
+    "total_rows": 10,
+    "total_memos": 100,
+    "has_next": true,
+    "has_prev": false
 }
 ```
 
@@ -44,10 +43,9 @@ Leaf is a simple backend application in C++, designed specifically for [my memo 
 {
     "id": "1",
     "title": "Memo Title",
-    "content": "Memo content goes here...",
-    "createdAt": "2024-01-01T12:00:00Z",
-    "tags": ["tag1", "tag2"],
-     
+    "summary": "A brief summary of the memo content...",
+    "create_date": "2024-01-01T12:00:00Z",
+    "markdown_file_id": "abc123",
 }
 ```
 

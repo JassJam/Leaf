@@ -5,7 +5,7 @@ set_languages("c++23")
 add_defines("NOMINMAX")
 
 set_policy("install.strip_packagelibs", false)
-set_warnings("allextra", "error")
+set_warnings("all", "error")
 
 --
 

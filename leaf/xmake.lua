@@ -1,7 +1,11 @@
 local packages = {
     {name = "boost-common", opts = {public = true}},
+    {name = "fmt", opts = {public = true}},
     {name = "crow", opts = {public = true}},
     {name = "coffee.dipp", opts = {public = true}},
+    {name = "nlohmann_json", opts = {public = true}},
+    {name = "libpq", opts = {public = true}},
+    {name = "libpqxx", opts = {public = true}},
 }
 
 if is_config("with-logging", true) then

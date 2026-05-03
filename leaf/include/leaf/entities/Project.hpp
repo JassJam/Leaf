@@ -14,6 +14,7 @@ namespace leaf
     {
         UUID                  Id;
         std::string           Title;
+        std::string           Summary;
         UUID                  Body;
         Date                  CreateDate;
         std::vector<Language> TechStack;

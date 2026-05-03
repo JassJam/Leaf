@@ -97,17 +97,19 @@ WITH journal_seed AS (
         ])[((gs - 1) % 10) + 1] AS topic
     FROM generate_series(1, 50) AS gs
 )
-INSERT INTO journal_entries (id, create_date, title, markdown_file_id)
+INSERT INTO journal_entries (id, create_date, title, summary, markdown_file_id)
 SELECT
     entry_id,
     (DATE '2026-01-01' + ((idx - 1) * INTERVAL '1 day'))::date,
     'Journal Entry ' || lpad(idx::text, 2, '0') || ': ' || topic,
+    'Review of ' || lower(topic) || ' with emphasis on delivery trade-offs and the next concrete change.',
     markdown_id
 FROM journal_seed
 ON CONFLICT (id) DO UPDATE
 SET
     create_date = EXCLUDED.create_date,
     title = EXCLUDED.title,
+    summary = EXCLUDED.summary,
     markdown_file_id = EXCLUDED.markdown_file_id;
 
 WITH project_seed AS (
@@ -174,17 +176,19 @@ WITH project_seed AS (
         ])[((gs - 1) % 10) + 1] AS project_name
     FROM generate_series(1, 50) AS gs
 )
-INSERT INTO projects (id, create_date, title, markdown_file_id)
+INSERT INTO projects (id, create_date, title, summary, markdown_file_id)
 SELECT
     project_id,
     (DATE '2025-06-01' + ((idx - 1) * INTERVAL '5 day'))::date,
     'Project ' || lpad(idx::text, 2, '0') || ': ' || project_name,
+    'A delivery-focused build around ' || lower(project_name) || ' intended to improve operational clarity and reduce manual work.',
     markdown_id
 FROM project_seed
 ON CONFLICT (id) DO UPDATE
 SET
     create_date = EXCLUDED.create_date,
     title = EXCLUDED.title,
+    summary = EXCLUDED.summary,
     markdown_file_id = EXCLUDED.markdown_file_id;
 
 WITH experience_seed AS (
@@ -217,7 +221,7 @@ WITH experience_seed AS (
         ])[((gs - 1) % 10) + 1] AS impact
     FROM generate_series(1, 50) AS gs
 )
-INSERT INTO experiences (id, start_date, end_date, title, description)
+INSERT INTO experiences (id, start_date, end_date, title, summary, description)
 SELECT
     experience_id,
     (DATE '2018-01-01' + ((idx - 1) * INTERVAL '45 day'))::date,
@@ -226,6 +230,7 @@ SELECT
         ELSE (DATE '2018-01-01' + ((idx - 1) * INTERVAL '45 day') + INTERVAL '540 day')::date
     END,
     role_name || ' ' || lpad(idx::text, 2, '0'),
+    'Owned cross-team delivery for reliability, maintainability, and operational visibility.',
     'Focused on platform delivery, team coordination, and codebase simplification. This role specifically ' || impact || '.'
 FROM experience_seed
 ON CONFLICT (id) DO UPDATE
@@ -233,6 +238,7 @@ SET
     start_date = EXCLUDED.start_date,
     end_date = EXCLUDED.end_date,
     title = EXCLUDED.title,
+    summary = EXCLUDED.summary,
     description = EXCLUDED.description;
 
 WITH project_url_seed AS (

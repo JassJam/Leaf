@@ -1,7 +1,10 @@
 #include <leaf/LeafApp.hpp>
 
-#include <leaf/services/GetJournalEntryEndpointService.hpp>
-#include <leaf/services/ListJournalEntriesEndpointService.hpp>
+#include <leaf/endpoints/GetJournalEntryEndpointService.hpp>
+#include <leaf/endpoints/ListJournalEntriesEndpointService.hpp>
+
+#include "leaf/backend/psql/PostgreSqlService.hpp"
+#include "leaf/backend/psql/PsqlJournalRepositoryService.hpp"
 
 namespace leaf::di
 {
@@ -9,8 +12,11 @@ namespace leaf::di
     {
         ServiceCollection services;
 
-        services.emplace<GetJournalEntryEndpointService>();
-        services.emplace<ListJournalEntriesEndpointService>();
+        GetJournalEntryEndpointService::Register(services);
+        ListJournalEntriesEndpointService::Register(services);
+
+        PostgreSqlService::Register(services);
+        PsqlJournalRepositoryService::Register(services);
 
         return services;
     }
@@ -25,6 +31,7 @@ int main()
 {
     auto app = leaf::di::CreateApp();
 
+    using x = leaf::GetJournalEntryEndpointService::value_type;
     app.Register<leaf::GetJournalEntryEndpointService>();
     app.Register<leaf::ListJournalEntriesEndpointService>();
 

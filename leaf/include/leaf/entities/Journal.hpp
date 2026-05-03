@@ -9,9 +9,10 @@ namespace leaf
 {
     struct JournalEntry
     {
-        UUID        Id;
+        std::string Id;
         std::string Title;
-        UUID        Body;
-        Date        CreateDate;
+        std::string Summary;
+        std::string CreateDate;
+        std::string MarkdownFileId;
     };
 }

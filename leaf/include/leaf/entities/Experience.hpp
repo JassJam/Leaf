@@ -15,6 +15,7 @@ namespace leaf
         Date                  StartDate;
         std::optional<Date>   EndDate;
         std::string           Title;
+        std::string           Summary;
         std::string           Description;
         std::vector<Language> TechStack;
     };

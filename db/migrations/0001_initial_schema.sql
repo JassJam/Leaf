@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS journal_entries (
     id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     create_date      DATE NOT NULL DEFAULT CURRENT_DATE,
     title            TEXT NOT NULL,
+    summary          TEXT NOT NULL,
     markdown_file_id UUID NOT NULL REFERENCES markdown_files(id) ON DELETE RESTRICT
 );
 
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS projects (
     id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     create_date      DATE NOT NULL DEFAULT CURRENT_DATE,
     title            TEXT NOT NULL,
+    summary          TEXT NOT NULL,
     markdown_file_id UUID NOT NULL REFERENCES markdown_files(id) ON DELETE RESTRICT
 );
 
@@ -46,6 +48,7 @@ CREATE TABLE IF NOT EXISTS experiences (
     start_date  DATE NOT NULL,
     end_date    DATE,
     title       TEXT NOT NULL,
+    summary     TEXT NOT NULL,
     description TEXT NOT NULL,
     CONSTRAINT chk_experience_dates CHECK (end_date IS NULL OR end_date > start_date)
 );
